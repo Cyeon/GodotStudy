@@ -3,6 +3,7 @@
 [ext_resource type="Texture2D" uid="uid://b3qg536nlviwj" path="res://assets/pipes/pipe.png" id="1_y6qxe"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_sy5em"]
+size = Vector2(53, 609)
 
 [node name="Pipe" type="Area2D"]
 
@@ -12,4 +13,5 @@ centered = false
 offset = Vector2(-35, 0)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-0.5, 321.5)
 shape = SubResource("RectangleShape2D_sy5em")

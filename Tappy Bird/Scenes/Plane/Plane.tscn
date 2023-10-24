@@ -56,7 +56,7 @@ _data = {
 "fly_to": SubResource("Animation_ksyni")
 }
 
-[node name="Plane" type="CharacterBody2D"]
+[node name="Plane" type="CharacterBody2D" groups=["GROUP_PLAYER"]]
 script = ExtResource("1_48rse")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]

@@ -1,0 +1,119 @@
+[gd_scene load_steps=10 format=3 uid="uid://cjfqsownm6wa2"]
+
+[ext_resource type="Texture2D" uid="uid://deyspof2eck6u" path="res://assets/background/sky.png" id="1_1hcb8"]
+[ext_resource type="Script" path="res://Scenes/UI/main_ui.gd" id="1_2md0r"]
+[ext_resource type="FontFile" uid="uid://chj7tds6adv7h" path="res://assets/fonts/LuckiestGuy-Regular.ttf" id="3_eirdo"]
+[ext_resource type="LabelSettings" uid="uid://bhyvotbxdlm37" path="res://Scenes/UI/Lg_40f_orange.tres" id="4_e35j5"]
+[ext_resource type="AudioStream" uid="uid://gkqt3k8t6gx6" path="res://assets/audio/bgm_menu.mp3" id="5_e4864"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_slcpf"]
+font = ExtResource("3_eirdo")
+font_size = 72
+font_color = Color(1, 0.415686, 0.294118, 1)
+outline_size = 5
+shadow_size = 3
+shadow_color = Color(0, 0, 0, 0.545098)
+shadow_offset = Vector2(3, 3)
+
+[sub_resource type="LabelSettings" id="LabelSettings_r77n8"]
+font = ExtResource("3_eirdo")
+font_size = 52
+outline_size = 5
+outline_color = Color(0, 0, 0, 1)
+shadow_size = 3
+shadow_color = Color(0, 0, 0, 0.545098)
+shadow_offset = Vector2(3, 3)
+
+[sub_resource type="Animation" id="Animation_0ux3l"]
+resource_name = "blink_desc"
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("TextureRect/MarginContainer/DescLabel:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5, 1),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0.388235), Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_rvith"]
+_data = {
+"blink_desc": SubResource("Animation_0ux3l")
+}
+
+[node name="MainUI" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_2md0r")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("1_1hcb8")
+expand_mode = 4
+
+[node name="MarginContainer" type="MarginContainer" parent="TextureRect"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 64
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 40
+
+[node name="TitleLabel" type="Label" parent="TextureRect/MarginContainer"]
+layout_mode = 2
+size_flags_vertical = 0
+text = "Flappy
+Plane"
+label_settings = SubResource("LabelSettings_slcpf")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="DescLabel" type="Label" parent="TextureRect/MarginContainer"]
+layout_mode = 2
+text = "Press Space
+To Play"
+label_settings = SubResource("LabelSettings_r77n8")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="TextureRect/MarginContainer"]
+layout_mode = 2
+size_flags_vertical = 8
+
+[node name="ScoreLabel" type="Label" parent="TextureRect/MarginContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Score 000"
+label_settings = ExtResource("4_e35j5")
+
+[node name="HighScoreLabel" type="Label" parent="TextureRect/MarginContainer/HBoxContainer"]
+layout_mode = 2
+text = "High 000"
+label_settings = ExtResource("4_e35j5")
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("5_e4864")
+autoplay = true
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+autoplay = "blink_desc"
+libraries = {
+"": SubResource("AnimationLibrary_rvith")
+}

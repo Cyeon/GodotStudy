@@ -1,9 +1,13 @@
-[gd_scene load_steps=6 format=3 uid="uid://cg0nn5k1jlf2d"]
+[gd_scene load_steps=10 format=3 uid="uid://cg0nn5k1jlf2d"]
 
 [ext_resource type="Script" path="res://Scenes/Level/Level.gd" id="1_cpyfn"]
-[ext_resource type="Texture2D" uid="uid://bokkaudnm1iqo" path="res://assets/background/rocks_2.png" id="1_dca0e"]
 [ext_resource type="PackedScene" uid="uid://bnrq4k3307kij" path="res://Scenes/Plane/Plane.tscn" id="2_g3li4"]
 [ext_resource type="PackedScene" uid="uid://u53ai6r6lgfw" path="res://Scenes/Pipes/pipes.tscn" id="3_c3xxp"]
+[ext_resource type="PackedScene" uid="uid://tqk5lh6urgo8" path="res://Scenes/UI/game_over.tscn" id="5_48hb8"]
+[ext_resource type="PackedScene" uid="uid://cg7fi4mg7f58o" path="res://Scenes/UI/game_hud.tscn" id="6_po078"]
+[ext_resource type="AudioStream" uid="uid://c37817togtaq2" path="res://assets/audio/engine.mp3" id="6_ykp4d"]
+[ext_resource type="AudioStream" uid="uid://ch0s8dr6lwew3" path="res://assets/audio/game_over.wav" id="7_ysbfc"]
+[ext_resource type="PackedScene" uid="uid://bygu2sgx4mtuy" path="res://Scenes/ScrollingBG/scrolling_bg.tscn" id="8_xrhdq"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_775ns"]
 size = Vector2(489, 20)
@@ -12,9 +16,7 @@ size = Vector2(489, 20)
 script = ExtResource("1_cpyfn")
 pipes_scene = ExtResource("3_c3xxp")
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
-position = Vector2(283, 334)
-texture = ExtResource("1_dca0e")
+[node name="ScrollingBG" parent="." instance=ExtResource("8_xrhdq")]
 
 [node name="Plane" parent="." instance=ExtResource("2_g3li4")]
 position = Vector2(45, 340)
@@ -38,5 +40,19 @@ gizmo_extents = 80.0
 [node name="Timer" type="Timer" parent="."]
 wait_time = 1.5
 autostart = true
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="GameOver" parent="CanvasLayer" instance=ExtResource("5_48hb8")]
+visible = false
+
+[node name="GameHUD" parent="CanvasLayer" instance=ExtResource("6_po078")]
+
+[node name="EngineSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("6_ykp4d")
+autoplay = true
+
+[node name="GameOverSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("7_ysbfc")
 
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
