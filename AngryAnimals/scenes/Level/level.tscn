@@ -1,0 +1,39 @@
+[gd_scene load_steps=6 format=3 uid="uid://b2fyiahlt1wk8"]
+
+[ext_resource type="Texture2D" uid="uid://ckd8x6n1ff2cs" path="res://assets/scene/colored_castle.png" id="1_5l7m6"]
+[ext_resource type="Script" path="res://scenes/Level/level.gd" id="1_kc28l"]
+[ext_resource type="PackedScene" uid="uid://b71qmy47kpkk1" path="res://scenes/Cup/cup.tscn" id="2_qfyuu"]
+[ext_resource type="PackedScene" uid="uid://c7gpxqulaothq" path="res://scenes/Water/water.tscn" id="4_5feiw"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_0hmot"]
+font_size = 36
+font_color = Color(0, 0, 0, 1)
+
+[node name="Level" type="Node2D"]
+script = ExtResource("1_kc28l")
+
+[node name="BackgroundImage" type="Sprite2D" parent="."]
+position = Vector2(515, 371)
+scale = Vector2(1.1, 1.1)
+texture = ExtResource("1_5l7m6")
+
+[node name="Cup" parent="." instance=ExtResource("2_qfyuu")]
+position = Vector2(594, 558)
+
+[node name="Cup2" parent="." instance=ExtResource("2_qfyuu")]
+position = Vector2(720, 465)
+
+[node name="Cup3" parent="." instance=ExtResource("2_qfyuu")]
+position = Vector2(847, 381)
+
+[node name="DebugLabel" type="Label" parent="."]
+offset_right = 40.0
+offset_bottom = 23.0
+text = "This is Debug Space"
+label_settings = SubResource("LabelSettings_0hmot")
+metadata/_edit_use_anchors_ = true
+
+[node name="AnimalStart" type="Marker2D" parent="."]
+position = Vector2(165, 233)
+
+[node name="Water" parent="." instance=ExtResource("4_5feiw")]

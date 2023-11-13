@@ -1,0 +1,45 @@
+[gd_scene load_steps=8 format=3 uid="uid://ccyfpfrt38qg"]
+
+[ext_resource type="Texture2D" uid="uid://crp6jv1bgnw01" path="res://assets/player/parrot.png" id="1_6dykk"]
+[ext_resource type="Script" path="res://scenes/Animal/animal.gd" id="1_y3xhd"]
+[ext_resource type="AudioStream" uid="uid://c0f3srptjxhtt" path="res://assets/audio/stretch2.ogg" id="3_0tegm"]
+[ext_resource type="AudioStream" uid="uid://nuuvhgfvie1q" path="res://assets/audio/catapult.ogg" id="4_x51yj"]
+[ext_resource type="AudioStream" uid="uid://dc5olpdixx1ks" path="res://assets/audio/kick_wood.ogg" id="5_m4vx5"]
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_u2st2"]
+bounce = 0.25
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_gxvb3"]
+radius = 26.0
+
+[node name="Animal" type="RigidBody2D" groups=["animal"]]
+input_pickable = true
+physics_material_override = SubResource("PhysicsMaterial_u2st2")
+max_contacts_reported = 1
+contact_monitor = true
+freeze = true
+script = ExtResource("1_y3xhd")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(0.2, 0.2)
+texture = ExtResource("1_6dykk")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_gxvb3")
+
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
+
+[node name="StretchSound" type="AudioStreamPlayer2D" parent="."]
+unique_name_in_owner = true
+stream = ExtResource("3_0tegm")
+
+[node name="LaunchSound" type="AudioStreamPlayer2D" parent="."]
+unique_name_in_owner = true
+stream = ExtResource("4_x51yj")
+
+[node name="CollisionSound" type="AudioStreamPlayer2D" parent="."]
+unique_name_in_owner = true
+stream = ExtResource("5_m4vx5")
+
+[connection signal="input_event" from="." to="." method="_on_input_event"]
+[connection signal="screen_exited" from="VisibleOnScreenNotifier2D" to="." method="_on_screen_exited"]
